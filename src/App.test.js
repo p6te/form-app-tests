@@ -69,65 +69,52 @@ test("should be able to tape a confirm password", () => {
 });
 
 test("should show email error message on invalid email", () => {
-  const emailErrorElement = screen.queryByText(
-    /the email you input is invalid/i
-  );
+  expect(
+    screen.queryByText(/the email you input is invalid/i)
+  ).not.toBeInTheDocument();
 
   typeIntoForm({
     email: "selenagmail.com",
   });
 
-  expect(emailErrorElement).not.toBeInTheDocument();
-
-  const emailErrorElementAgain = screen.queryByText(
-    /the email you input is invalid/i
-  );
-
-  expect(emailErrorElementAgain).toBeInTheDocument();
+  expect(
+    screen.queryByText(/the email you input is invalid/i)
+  ).toBeInTheDocument();
 });
 
 test("should show password error message on invalid password", () => {
-  const passwordErrorElement = screen.queryByText(
-    /the password you entered should contain 5 or more characters/i
-  );
+  expect(
+    screen.queryByText(
+      /the password you entered should contain 5 or more characters/i
+    )
+  ).not.toBeInTheDocument();
 
   typeIntoForm({
     email: "selena@gmail.com",
-  });
-
-  expect(passwordErrorElement).not.toBeInTheDocument();
-
-  typeIntoForm({
     password: "pas",
   });
 
-  const passwordErrorElementAgain = screen.queryByText(
-    /the password you entered should contain 5 or more characters/i
-  );
-
-  expect(passwordErrorElementAgain).toBeInTheDocument();
+  expect(
+    screen.queryByText(
+      /the password you entered should contain 5 or more characters/i
+    )
+  ).toBeInTheDocument();
 });
 
 test("should show confirm password error message if password don't match", () => {
-  const confirmPasswordErrorElement = screen.queryByText(
-    /passwords don't match each other/i
-  );
+  expect(
+    screen.queryByText(/passwords don't match each other/i)
+  ).not.toBeInTheDocument();
+
   typeIntoForm({
     email: "selena@gmail.com",
     password: "password",
-  });
-
-  expect(confirmPasswordErrorElement).not.toBeInTheDocument();
-
-  typeIntoForm({
     confirmPassword: "123456",
   });
 
-  const confirmPasswordErrorElementAgain = screen.queryByText(
-    /passwords don't match each other/i
-  );
-
-  expect(confirmPasswordErrorElementAgain).toBeInTheDocument();
+  expect(
+    screen.queryByText(/passwords don't match each other/i)
+  ).toBeInTheDocument();
 });
 
 test("should show no error message if every input is valid", () => {
@@ -137,17 +124,17 @@ test("should show no error message if every input is valid", () => {
     confirmPassword: "password",
   });
 
-  const emailErrorElement = screen.queryByText(
-    /the email you input is invalid/i
-  );
-  const passwordErrorElement = screen.queryByText(
-    /the password you entered should contain 5 or more characters/i
-  );
-  const confirmPasswordErrorElementAgain = screen.queryByText(
-    /passwords don't match each other/i
-  );
+  expect(
+    screen.queryByText(/the email you input is invalid/i)
+  ).not.toBeInTheDocument();
 
-  expect(emailErrorElement).not.toBeInTheDocument();
-  expect(passwordErrorElement).not.toBeInTheDocument();
-  expect(confirmPasswordErrorElementAgain).not.toBeInTheDocument();
+  expect(
+    screen.queryByText(
+      /the password you entered should contain 5 or more characters/i
+    )
+  ).not.toBeInTheDocument();
+
+  expect(
+    screen.queryByText(/passwords don't match each other/i)
+  ).not.toBeInTheDocument();
 });
