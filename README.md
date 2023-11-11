@@ -1,6 +1,6 @@
 <h1>This is simple form app.</h1>
 
-<h2>Project was made for practice of testing.</h2>
+<h2>The project was created for the purpose of testing practice.</h2>
 
 </br>
 
